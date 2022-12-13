@@ -1,10 +1,22 @@
 package com.in28minutes.unittesting.unittesting.model;
 
+
+import jakarta.persistence.*;
+
+@Entity
 public class Item {
+
+    @Id
     private int id;
     private String name;
     private int price;
     private int quantity;
+
+    @Transient
+    private int value;
+
+    public Item() {
+    }
 
     public Item(int id, String name, int price, int quantity) {
         this.id = id;
@@ -12,6 +24,7 @@ public class Item {
         this.price = price;
         this.quantity = quantity;
     }
+
 
     public int getId() {
         return id;
@@ -29,7 +42,15 @@ public class Item {
         return quantity;
     }
 
-    public String toString(){
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public String toString() {
         return String.format("Item[%d, %s, %d, %d]", id, name, price, quantity);
     }
 }
