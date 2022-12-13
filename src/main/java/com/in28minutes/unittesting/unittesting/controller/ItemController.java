@@ -6,11 +6,13 @@ import com.in28minutes.unittesting.unittesting.model.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @RestController
 public class ItemController {
 
     @Autowired
-    private ItemBusinessServices itemBusinessServices;
+    private ItemBusinessServices businessServices;
 
     @GetMapping("/dummy-item")
     public Item dummyItem(){
@@ -19,6 +21,12 @@ public class ItemController {
 
     @GetMapping("/item-from-business-service")
     public Item itemFromBusinessService(){
-        return itemBusinessServices.retreiveHardcodedItem();
+        return businessServices.retreiveHardcodedItem();
     }
+
+    @GetMapping("/all-items-from-database")
+    public List<Item> retrieveAllItems(){
+        return businessServices.retrieveAllItems();
+    }
+
 }
