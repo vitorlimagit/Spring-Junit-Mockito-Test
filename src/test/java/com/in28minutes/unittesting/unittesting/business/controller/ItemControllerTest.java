@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.*;
+
 @WebMvcTest(ItemController.class)
 public class ItemControllerTest {
 
@@ -54,6 +56,26 @@ public class ItemControllerTest {
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().json("{id:2, name:Item2, price:10}"))
+                .andReturn();
+        //JSONAssert.assertEquals(expected, actual, false);
+    }
+
+    @Test
+    public void retrieveAllItems_basic() throws Exception {
+
+        when(businessServices.retrieveAllItems()).thenReturn(
+                Arrays.asList(new Item(2, "Item2", 10,10),
+                new Item(3, "Item3", 20,20))
+                );
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/all-items-from-database")
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{id:2, name:Item2, price:10}," +
+                        "{}]"))
                 .andReturn();
         //JSONAssert.assertEquals(expected, actual, false);
     }
