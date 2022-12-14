@@ -20,7 +20,6 @@ public class ItemBusinessServicetest {
     @Mock
     private ItemRepository repository;
 
-
     @Test
     public void  calculateSumUsingDataService_basic() {
         when(repository.findAll()).thenReturn(Arrays.asList(new Item(2, "Item2", 10,10),
