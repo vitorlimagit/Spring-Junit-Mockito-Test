@@ -47,7 +47,8 @@ public class ItemControllerTest {
     public void itemFromBusinessService_basic() throws Exception {
 
         when(businessServices.retreiveHardcodedItem()).thenReturn(
-                new Item(2, "Item2", 10,10));
+                new Item(2, "Item2", 10,10),
+                new Item(3, "Item3", 20,20));
 
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/item-from-business-service")
@@ -65,7 +66,7 @@ public class ItemControllerTest {
 
         when(businessServices.retrieveAllItems()).thenReturn(
                 Arrays.asList(new Item(2, "Item2", 10,10),
-                new Item(3, "Item3", 20,20))
+                        new Item(3, "Item3",20,20))
                 );
 
         RequestBuilder request = MockMvcRequestBuilders
@@ -74,8 +75,7 @@ public class ItemControllerTest {
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{id:2, name:Item2, price:10}," +
-                        "{}]"))
+                .andExpect(content().json("[{id:3,name:Item3,price:20}, {id:2,name:Item2,price:10}]"))
                 .andReturn();
         //JSONAssert.assertEquals(expected, actual, false);
     }
