@@ -1,4 +1,4 @@
-package com.in28minutes.unittesting.unittesting.business;
+package com.in28minutes.unittesting.unittesting.business.spike;
 
 import org.junit.jupiter.api.*;
 
